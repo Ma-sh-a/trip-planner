@@ -1,24 +1,24 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useAuth } from "../contexts/auth-context";
-import "../styles/auth.css";
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuth } from '../contexts/auth-context';
+import '../styles/auth.css';
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login, signup } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError("");
+    setError('');
 
     if (isSignUp && password !== confirmPassword) {
-      return setError("Пароли не совпадают");
+      return setError('Пароли не совпадают');
     }
 
     try {
@@ -30,9 +30,9 @@ const Auth = () => {
         await login(email, password);
       }
 
-      navigate("/trips");
+      navigate('/trips');
     } catch (error: any) {
-      setError(error.message || "Произошла ошибка");
+      setError(error.message || 'Произошла ошибка');
     } finally {
       setLoading(false);
     }
@@ -40,7 +40,7 @@ const Auth = () => {
 
   return (
     <div className="auth-container">
-      <h1 className="auth-title">{isSignUp ? "Создать аккаунт" : "Вход"}</h1>
+      <h1 className="auth-title">{isSignUp ? 'Создать аккаунт' : 'Вход'}</h1>
 
       {error && <div className="auth-error">{error}</div>}
 
@@ -51,7 +51,7 @@ const Auth = () => {
           className="auth-input"
           required
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
         />
 
         <input
@@ -60,7 +60,7 @@ const Auth = () => {
           className="auth-input"
           required
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
         />
 
         {isSignUp && (
@@ -70,7 +70,7 @@ const Auth = () => {
             className="auth-input"
             required
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={e => setConfirmPassword(e.target.value)}
           />
         )}
 
@@ -79,19 +79,19 @@ const Auth = () => {
           className="auth-button auth-button--primary"
           disabled={loading}
         >
-          {loading ? "Загрузка..." : isSignUp ? "Зарегистрироваться" : "Войти"}
+          {loading ? 'Загрузка...' : isSignUp ? 'Зарегистрироваться' : 'Войти'}
         </button>
       </form>
 
       <div className="auth-switch">
         <p>
-          {isSignUp ? "Уже есть аккаунт?" : "Еще нет аккаунта?"}
+          {isSignUp ? 'Уже есть аккаунт?' : 'Еще нет аккаунта?'}
           <button
             type="button"
             className="auth-switch-button"
             onClick={() => setIsSignUp(!isSignUp)}
           >
-            {isSignUp ? "Войти" : "Создать"}
+            {isSignUp ? 'Войти' : 'Создать'}
           </button>
         </p>
       </div>

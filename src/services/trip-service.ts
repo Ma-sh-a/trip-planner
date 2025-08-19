@@ -8,8 +8,8 @@ import {
   query,
   where,
   orderBy,
-} from "firebase/firestore";
-import { db } from "../firebase";
+} from 'firebase/firestore';
+import { db } from '../firebase';
 
 export interface Trip {
   id?: string;
@@ -23,8 +23,8 @@ export interface Trip {
 }
 
 export const tripService = {
-  createTrip: async (trip: Omit<Trip, "id" | "createdAt">): Promise<string> => {
-    const docRef = await addDoc(collection(db, "trips"), {
+  createTrip: async (trip: Omit<Trip, 'id' | 'createdAt'>): Promise<string> => {
+    const docRef = await addDoc(collection(db, 'trips'), {
       ...trip,
       createdAt: new Date(),
     });
@@ -33,13 +33,13 @@ export const tripService = {
 
   getUserTrips: async (userId: string): Promise<Trip[]> => {
     const q = query(
-      collection(db, "trips"),
-      where("userId", "==", userId),
-      orderBy("createdAt", "desc"),
+      collection(db, 'trips'),
+      where('userId', '==', userId),
+      orderBy('createdAt', 'desc')
     );
 
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((doc) => ({
+    return querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data(),
     })) as Trip[];
@@ -51,10 +51,10 @@ export const tripService = {
   },
 
   updateTrip: async (tripId: string, updates: Partial<Trip>): Promise<void> => {
-    await updateDoc(doc(db, "trips", tripId), updates);
+    await updateDoc(doc(db, 'trips', tripId), updates);
   },
 
   deleteTrip: async (tripId: string): Promise<void> => {
-    await deleteDoc(doc(db, "trips", tripId));
+    await deleteDoc(doc(db, 'trips', tripId));
   },
 };

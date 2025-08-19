@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import "../styles/toast.css";
+import { useEffect } from 'react';
+import '../styles/toast.css';
 
 interface ToastProps {
   message: string;
-  type: "success" | "error";
+  type: 'success' | 'error';
   onClose: () => void;
   duration?: number;
 }

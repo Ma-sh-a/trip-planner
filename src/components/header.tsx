@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/auth-context";
-import "../styles/header.css";
+import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/auth-context';
+import '../styles/header.css';
 
 const Header = () => {
   const { currentUser, logout } = useAuth();
@@ -9,7 +9,7 @@ const Header = () => {
     try {
       await logout();
     } catch (error) {
-      console.error("Ошибка выхода:", error);
+      console.error('Ошибка выхода:', error);
     }
   };
 

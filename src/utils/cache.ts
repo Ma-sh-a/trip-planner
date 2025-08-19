@@ -1,4 +1,4 @@
-const CACHE_PREFIX = "trip-planner-";
+const CACHE_PREFIX = 'trip-planner-';
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 часа
 
 export const cache = {

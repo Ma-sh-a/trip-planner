@@ -1,4 +1,4 @@
-@import url("./color.css");
+@import url('./color.css');
 
 .auth-container {
   display: flex;
@@ -86,7 +86,7 @@
   font-size: 1rem;
   background: transparent;
   transition: all 0.3s ease;
-  font-family: "Courier New", monospace;
+  font-family: 'Courier New', monospace;
 }
 
 .auth-input:focus {

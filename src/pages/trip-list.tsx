@@ -1,11 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useAuth } from "../contexts/auth-context";
-import Modal from "../components/modal";
-import CreateTripForm, { TripData } from "../components/create-trip-form";
-import Toast from "../components/toast";
-import { tripService } from "../services/trip-service";
-import "../styles/trip-list.css";
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../contexts/auth-context';
+import Modal from '../components/modal';
+import CreateTripForm, { TripData } from '../components/create-trip-form';
+import Toast from '../components/toast';
+import { tripService } from '../services/trip-service';
+import '../styles/trip-list.css';
 
 interface Trip {
   id: string;
@@ -24,7 +24,7 @@ const TripList = () => {
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState<{
     message: string;
-    type: "success" | "error";
+    type: 'success' | 'error';
   } | null>(null);
 
   const { currentUser } = useAuth();
@@ -38,8 +38,8 @@ const TripList = () => {
         const userTrips = await tripService.getUserTrips(currentUser.uid);
         setTrips(userTrips as Trip[]);
       } catch (error) {
-        console.error("Ошибка загрузки поездок:", error);
-        setToast({ message: "Ошибка загрузки поездок", type: "error" });
+        console.error('Ошибка загрузки поездок:', error);
+        setToast({ message: 'Ошибка загрузки поездок', type: 'error' });
       } finally {
         setLoading(false);
       }
@@ -54,7 +54,7 @@ const TripList = () => {
     setIsModalOpen(false);
 
     const optimisticTrip: Trip = {
-      id: "temp-" + Date.now(),
+      id: 'temp-' + Date.now(),
       title: formData.title,
       location: formData.location,
       startDate: formData.startDate,
@@ -64,7 +64,7 @@ const TripList = () => {
       createdAt: new Date(),
     };
 
-    setTrips((prev) => [optimisticTrip, ...prev]);
+    setTrips(prev => [optimisticTrip, ...prev]);
 
     try {
       const newTripId = await tripService.createTrip({
@@ -76,19 +76,19 @@ const TripList = () => {
         userId: currentUser.uid,
       });
 
-      setTrips((prev) =>
-        prev.map((trip) =>
-          trip.id === optimisticTrip.id ? { ...trip, id: newTripId } : trip,
-        ),
+      setTrips(prev =>
+        prev.map(trip =>
+          trip.id === optimisticTrip.id ? { ...trip, id: newTripId } : trip
+        )
       );
 
-      setToast({ message: "Поездка создана!", type: "success" });
+      setToast({ message: 'Поездка создана!', type: 'success' });
 
       navigate(`/trip/${newTripId}`);
     } catch (error) {
-      console.error("Ошибка создания поездки:", error);
-      setTrips((prev) => prev.filter((trip) => trip.id !== optimisticTrip.id));
-      setToast({ message: "Не удалось создать поездку", type: "error" });
+      console.error('Ошибка создания поездки:', error);
+      setTrips(prev => prev.filter(trip => trip.id !== optimisticTrip.id));
+      setToast({ message: 'Не удалось создать поездку', type: 'error' });
     }
   };
 
@@ -123,7 +123,7 @@ const TripList = () => {
         </div>
       ) : (
         <div className="trips-grid">
-          {trips.map((trip) => (
+          {trips.map(trip => (
             <Link to={`/trip/${trip.id}`} key={trip.id} className="trip-card">
               <div className="trip-card-content">
                 <h3>{trip.title}</h3>

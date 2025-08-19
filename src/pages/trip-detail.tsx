@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useAuth } from "../contexts/auth-context";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
-import Map from "../components/map";
-import { geocodingService } from "../services/geocoding-service";
-import "../styles/trip-detail.css";
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../contexts/auth-context';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import Map from '../components/map';
+import { geocodingService } from '../services/geocoding-service';
+import '../styles/trip-detail.css';
 
 interface Location {
   id: string;
@@ -40,20 +40,20 @@ const TripDetail = () => {
       if (!tripId || !currentUser) return;
 
       try {
-        const tripDoc = await getDoc(doc(db, "trips", tripId));
+        const tripDoc = await getDoc(doc(db, 'trips', tripId));
 
         if (tripDoc.exists()) {
           const tripData = tripDoc.data() as Trip;
           if (tripData.userId === currentUser.uid) {
             setTrip({ ...tripData, id: tripDoc.id });
           } else {
-            console.error("Нет доступа к этой поездке");
+            console.error('Нет доступа к этой поездке');
           }
         } else {
-          console.error("Поездка не найдена");
+          console.error('Поездка не найдена');
         }
       } catch (error) {
-        console.error("Ошибка загрузки поездки:", error);
+        console.error('Ошибка загрузки поездки:', error);
       } finally {
         setLoading(false);
       }
@@ -66,7 +66,7 @@ const TripDetail = () => {
     const loadLocationData = async () => {
       if (trip?.location) {
         const coordinates = await geocodingService.getCoordinates(
-          trip.location,
+          trip.location
         );
 
         if (coordinates) {
@@ -75,7 +75,7 @@ const TripDetail = () => {
 
           setLocations([
             {
-              id: "main-location",
+              id: 'main-location',
               latitude: coordinates.latitude,
               longitude: coordinates.longitude,
               name: trip.location,

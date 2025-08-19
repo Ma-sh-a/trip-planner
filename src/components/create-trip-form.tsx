@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "../styles/create-trip-form.css";
+import React, { useState } from 'react';
+import '../styles/create-trip-form.css';
 
 interface CreateTripFormProps {
   onSubmit: (tripData: TripData) => void;
@@ -19,11 +19,11 @@ const CreateTripForm: React.FC<CreateTripFormProps> = ({
   onCancel,
 }) => {
   const [formData, setFormData] = useState<TripData>({
-    title: "",
-    location: "",
-    startDate: "",
-    endDate: "",
-    description: "",
+    title: '',
+    location: '',
+    startDate: '',
+    endDate: '',
+    description: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,10 +32,10 @@ const CreateTripForm: React.FC<CreateTripFormProps> = ({
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [name]: value,
     }));
