@@ -1,0 +1,78 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.npm
+.yarn-integrity
+
+# Production builds
+/build
+/dist
+
+# Testing
+/coverage
+*.lcov
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# IDE and OS
+.DS_Store
+.idea
+.vscode
+*.swp
+*.swo
+
+# ESLint
+.eslintcache
+
+# REPL history
+.node_repl_history
+
+# Package outputs
+*.tgz
+
+# Parcel bundler cache
+.cache
+.parcel-cache
+
+# Framework specific
+.next
+.nuxt
+.gatsby
+.cache/
+public/
+
+# Serverless
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# VSCode test
+.vscode-test
+
+# Temporary folders
+tmp/
+temp/

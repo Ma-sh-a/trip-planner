@@ -1,0 +1,92 @@
+.header {
+  background-color: var(--travel-white);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--travel-dark);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.header-logo:hover {
+  opacity: 0.8;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--travel-dark);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--travel-accent);
+  background-color: var(--travel-light);
+}
+
+.logout-btn {
+  background: var(--travel-cloud);
+  color: var(--travel-dark);
+  border: 2px solid var(--travel-light);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.logout-btn:hover {
+  background: var(--travel-hover);
+  border-color: var(--travel-accent);
+  color: var(--travel-accent-dark);
+}
+
+/* адаптив для мобильных */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 1rem;
+  }
+  .header-logo {
+    font-size: 1.2rem;
+  }
+  .header-nav {
+    gap: 1rem;
+  }
+  .nav-link {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .logout-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,56 @@
+.trip-list-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trip-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.create-trip-btn {
+  background-color: var(--travel-accent);
+  color: var(--travel-white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+}
+
+.trips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.trip-card {
+  background: var(--travel-white);
+  padding: 1.5rem;
+  border-radius: 15px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-5px);
+}
+
+.trip-location {
+  color: var(--travel-accent);
+  font-size: 0.9rem;
+  margin: 0.3rem 0;
+  font-weight: 500;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--travel-accent-dark);
+  font-size: 1.1rem;
+}
