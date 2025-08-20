@@ -1,4 +1,3 @@
-// src/App.tsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/auth-context';
 import ProtectedRoute from './components/protected-route';
@@ -18,7 +17,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
 
-            {/* Защищенные маршруты */}
             <Route
               path="/trips"
               element={

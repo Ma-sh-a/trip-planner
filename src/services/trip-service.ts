@@ -4,57 +4,79 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  getDocs,
   query,
   where,
   orderBy,
+  getDocs,
 } from 'firebase/firestore';
-import { db } from '../firebase';
-
-export interface Trip {
-  id?: string;
-  title: string;
-  location: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-  userId: string;
-  createdAt: Date;
-}
+import { db, auth } from '../firebase';
 
 export const tripService = {
-  createTrip: async (trip: Omit<Trip, 'id' | 'createdAt'>): Promise<string> => {
-    const docRef = await addDoc(collection(db, 'trips'), {
-      ...trip,
-      createdAt: new Date(),
-    });
-    return docRef.id;
+  // СОЗДАТЬ поездку
+  async createTrip(tripData: any) {
+    try {
+      const user = auth.currentUser;
+      if (!user) throw new Error('User not authenticated');
+
+      const docRef = await addDoc(collection(db, 'trips'), {
+        ...tripData,
+        userId: user.uid,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+      return docRef.id;
+    } catch (error) {
+      console.error('Firestore error:', error);
+      throw error;
+    }
   },
 
-  getUserTrips: async (userId: string): Promise<Trip[]> => {
-    const q = query(
-      collection(db, 'trips'),
-      where('userId', '==', userId),
-      orderBy('createdAt', 'desc')
-    );
+  // ПОЛУЧИТЬ все поездки пользователя (БЕЗ КЭША)
+  async getUserTrips(userId: string) {
+    try {
+      const user = auth.currentUser;
+      if (!user) {
+        console.error('User not authenticated');
+        return [];
+      }
 
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    })) as Trip[];
+      const q = query(
+        collection(db, 'trips'),
+        where('userId', '==', userId),
+        orderBy('createdAt', 'desc')
+      );
+
+      const querySnapshot = await getDocs(q);
+      return querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+    } catch (error) {
+      console.error('Error getting trips:', error);
+      return [];
+    }
   },
 
-  getTripById: async (tripId: string): Promise<Trip | null> => {
-    // здесь будет логика получения конкретной поездки
-    return null;
+  // ОБНОВИТЬ поездку
+  async updateTrip(tripId: string, updates: any) {
+    try {
+      await updateDoc(doc(db, 'trips', tripId), {
+        ...updates,
+        updatedAt: new Date(),
+      });
+    } catch (error) {
+      console.error('Error updating trip:', error);
+      throw error;
+    }
   },
 
-  updateTrip: async (tripId: string, updates: Partial<Trip>): Promise<void> => {
-    await updateDoc(doc(db, 'trips', tripId), updates);
-  },
-
-  deleteTrip: async (tripId: string): Promise<void> => {
-    await deleteDoc(doc(db, 'trips', tripId));
+  // УДАЛИТЬ поездку
+  async deleteTrip(tripId: string) {
+    try {
+      await deleteDoc(doc(db, 'trips', tripId));
+    } catch (error) {
+      console.error('Error deleting trip:', error);
+      throw error;
+    }
   },
 };

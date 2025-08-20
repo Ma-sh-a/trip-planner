@@ -35,6 +35,7 @@ const TripList = () => {
       if (!currentUser) return;
 
       try {
+        // ПРОСТО загружаем из Firestore БЕЗ КЭША
         const userTrips = await tripService.getUserTrips(currentUser.uid);
         setTrips(userTrips as Trip[]);
       } catch (error) {
@@ -50,21 +51,7 @@ const TripList = () => {
 
   const handleCreateTrip = async (formData: TripData) => {
     if (!currentUser) return;
-
     setIsModalOpen(false);
-
-    const optimisticTrip: Trip = {
-      id: 'temp-' + Date.now(),
-      title: formData.title,
-      location: formData.location,
-      startDate: formData.startDate,
-      endDate: formData.endDate,
-      description: formData.description,
-      userId: currentUser.uid,
-      createdAt: new Date(),
-    };
-
-    setTrips(prev => [optimisticTrip, ...prev]);
 
     try {
       const newTripId = await tripService.createTrip({
@@ -75,19 +62,10 @@ const TripList = () => {
         description: formData.description,
         userId: currentUser.uid,
       });
-
-      setTrips(prev =>
-        prev.map(trip =>
-          trip.id === optimisticTrip.id ? { ...trip, id: newTripId } : trip
-        )
-      );
-
       setToast({ message: 'Поездка создана!', type: 'success' });
-
       navigate(`/trip/${newTripId}`);
     } catch (error) {
       console.error('Ошибка создания поездки:', error);
-      setTrips(prev => prev.filter(trip => trip.id !== optimisticTrip.id));
       setToast({ message: 'Не удалось создать поездку', type: 'error' });
     }
   };
