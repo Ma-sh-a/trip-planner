@@ -18,6 +18,31 @@
   padding: 0.8rem 1.5rem;
   border-radius: 20px;
   cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.edit-trip-btn:hover {
+  background-color: var(--travel-accent-dark);
+}
+
+.edit-trip-btn:disabled {
+  background-color: var(--travel-placeholder);
+  cursor: not-allowed;
+}
+
+.edit-trip-btn.cancel-btn {
+  background-color: var(--travel-placeholder);
+}
+
+.edit-trip-btn.cancel-btn:hover {
+  background-color: #a8c6f0;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 1rem;
 }
 
 .trip-info {
@@ -25,6 +50,25 @@
   padding: 1.5rem;
   border-radius: 15px;
   margin-bottom: 2rem;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.info-row strong {
+  color: var(--travel-dark);
+  min-width: 120px;
+  display: inline-block;
+}
+
+.trip-info p {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: flex-start;
 }
 
 .trip-sections {
@@ -52,14 +96,59 @@
   color: #e74c3c;
 }
 
-.trip-info strong {
-  color: var(--travel-dark);
-  min-width: 120px;
-  display: inline-block;
+/* cтили для состояния редактирования */
+.edit-input {
+  width: 100%;
+  max-width: 450px;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--travel-accent);
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  background-color: var(--travel-white);
+  color: black;
 }
 
-.trip-info p {
-  margin-bottom: 0.8rem;
+.edit-input:focus {
+  outline: none;
+  border-color: var(--travel-accent-dark);
+}
+
+.edit-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--travel-accent);
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  background-color: var(--travel-white);
+  color: black;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.edit-textarea:focus {
+  outline: none;
+  border-color: var(--travel-accent-dark);
+}
+
+.date-inputs {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.date-separator {
+  color: black;
+  font-weight: bold;
+}
+
+.notes-content {
+  line-height: 1.6;
+  color: var(--travel-dark);
+}
+
+.notes-placeholder {
+  color: var(--travel-placeholder);
+  font-style: italic;
 }
