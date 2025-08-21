@@ -8,6 +8,7 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login, signup } = useAuth();
@@ -17,7 +18,11 @@ const Auth = () => {
     event.preventDefault();
     setError('');
 
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
     if (isSignUp && password !== confirmPassword) {
+      setIsSubmitting(false);
       return setError('Пароли не совпадают');
     }
 
@@ -35,6 +40,7 @@ const Auth = () => {
       setError(error.message || 'Произошла ошибка');
     } finally {
       setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -77,7 +83,7 @@ const Auth = () => {
         <button
           type="submit"
           className="auth-button auth-button--primary"
-          disabled={loading}
+          disabled={loading || isSubmitting}
         >
           {loading ? 'Загрузка...' : isSignUp ? 'Зарегистрироваться' : 'Войти'}
         </button>
