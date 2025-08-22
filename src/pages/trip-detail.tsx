@@ -6,7 +6,9 @@ import { db } from '../firebase';
 import Map from '../components/map';
 import { geocodingService } from '../services/geocoding-service';
 import '../styles/trip-detail.css';
-
+import '../styles/checklist.css';
+import { useChecklist, ChecklistItem } from '../hooks/use-сhecklist';
+import { ChecklistComponent } from '../components/checklist';
 interface Location {
   id: string;
   latitude: number;
@@ -23,6 +25,7 @@ interface Trip {
   description: string;
   userId: string;
   notes?: string;
+  checklist?: ChecklistItem[];
 }
 
 const TripDetail = () => {
@@ -38,6 +41,29 @@ const TripDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTrip, setEditedTrip] = useState<Partial<Trip>>({});
   const [saving, setSaving] = useState(false);
+
+  const {
+    newItemText,
+    setNewItemText,
+    editingItemId,
+    editItemText,
+    setEditItemText,
+    addItem,
+    toggleItem,
+    deleteItem,
+    startEditing,
+    saveEditing,
+    cancelEditing,
+    handleKeyPress,
+  } = useChecklist({
+    tripId,
+    initialChecklist: trip?.checklist || [],
+    onChecklistUpdate: updatedChecklist => {
+      if (trip) {
+        setTrip({ ...trip, checklist: updatedChecklist });
+      }
+    },
+  });
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -281,10 +307,21 @@ const TripDetail = () => {
           )}
         </section>
 
-        <section className="trip-section">
-          <h2>Чек-лист</h2>
-          <p>Здесь будет список для сборов...</p>
-        </section>
+        <ChecklistComponent
+          checklist={trip?.checklist || []}
+          newItemText={newItemText}
+          editingItemId={editingItemId}
+          editItemText={editItemText}
+          onNewItemChange={setNewItemText}
+          onEditItemChange={setEditItemText}
+          onAddItem={addItem}
+          onToggleItem={toggleItem}
+          onDeleteItem={deleteItem}
+          onStartEditing={startEditing}
+          onSaveEditing={saveEditing}
+          onCancelEditing={cancelEditing}
+          onKeyPress={handleKeyPress}
+        />
       </div>
     </div>
   );

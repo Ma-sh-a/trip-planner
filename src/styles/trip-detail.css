@@ -145,10 +145,10 @@
 
 .notes-content {
   line-height: 1.6;
-  color: var(--travel-dark);
+  color: black;
 }
 
 .notes-placeholder {
-  color: var(--travel-placeholder);
+  color: black;
   font-style: italic;
 }

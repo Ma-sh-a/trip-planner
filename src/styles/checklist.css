@@ -1,0 +1,233 @@
+.checklist-add-form {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.checklist-input {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid var(--travel-accent);
+  border-radius: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  background: var(--travel-white);
+  color: var(--travel-dark);
+}
+
+.checklist-input:focus {
+  outline: none;
+  border-color: var(--travel-accent-dark);
+  box-shadow: 0 0 0 3px rgba(143, 191, 255, 0.2);
+}
+
+.checklist-add-btn {
+  background-color: var(--travel-accent);
+  color: var(--travel-white);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.checklist-add-btn:hover:not(:disabled) {
+  background-color: var(--travel-accent-dark);
+  transform: translateY(-1px);
+}
+
+.checklist-add-btn:disabled {
+  background-color: var(--travel-placeholder);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.checklist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(
+    135deg,
+    var(--travel-white) 0%,
+    var(--travel-cloud) 100%
+  );
+  border-radius: 12px;
+  border: 2px solid var(--travel-accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.checklist-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.checklist-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--travel-accent);
+  flex-shrink: 0;
+}
+
+.checklist-item-content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  min-height: 24px;
+}
+
+.checklist-item-text {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.checklist-item-completed {
+  text-decoration: line-through;
+  color: var(--travel-placeholder);
+  opacity: 0.7;
+}
+
+.checklist-item-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.checklist-edit-btn,
+.checklist-delete-btn,
+.checklist-save-btn,
+.checklist-cancel-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0.4rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+.checklist-edit-btn:hover {
+  background-color:  rgb(254, 217, 249);
+  color: white;
+}
+
+.checklist-delete-btn:hover {
+  background-color: rgb(254, 217, 249);
+  color: white;
+}
+
+.checklist-save-btn:hover {
+  background-color: rgb(254, 217, 249);
+  color: white;
+}
+
+.checklist-cancel-btn:hover {
+  background-color:rgb(254, 217, 249);
+  color: white;
+}
+
+.checklist-edit-form {
+  flex: 1;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.checklist-edit-input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 2px solid var(--travel-accent);
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  background: var(--travel-white);
+}
+
+.checklist-edit-input:focus {
+  outline: none;
+  border-color: var(--travel-accent-dark);
+}
+
+.checklist-empty {
+  text-align: center;
+  color: var(--travel-placeholder);
+  font-style: italic;
+  padding: 2rem;
+  background: var(--travel-cloud);
+  border-radius: 12px;
+  border: 2px dashed var(--travel-accent);
+}
+
+.checklist-progress {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--travel-cloud);
+  border-radius: 12px;
+  border: 2px solid var(--travel-accent);
+}
+
+.checklist-progress-text {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  color: var(--travel-dark);
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checklist-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--travel-white);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.checklist-progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--travel-accent),
+    var(--travel-accent-dark)
+  );
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+@keyframes checklistItemAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.checklist-item {
+  animation: checklistItemAppear 0.3s ease;
+}
